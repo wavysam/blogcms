@@ -1,7 +1,10 @@
-import Sidebar from "@/components/layout/Sidebar";
 import "../globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+
+import Sidebar from "@/components/layout/Sidebar";
+import QueryProvider from "@/components/providers/QueryProvider";
+import ToastProvider from "@/components/providers/ToastProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -18,10 +21,15 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <div className="flex">
-          <Sidebar />
-          <main className="p-4">{children}</main>
-        </div>
+        <QueryProvider>
+          <ToastProvider />
+          <div className="flex">
+            <Sidebar />
+            <main className="px-4 my-16 max-w-6xl mx-auto w-full">
+              {children}
+            </main>
+          </div>
+        </QueryProvider>
       </body>
     </html>
   );
