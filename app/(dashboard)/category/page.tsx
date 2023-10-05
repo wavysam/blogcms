@@ -1,7 +1,7 @@
 import dayjs from "dayjs";
 
 import prisma from "@/lib/prisma";
-import { columns } from "./columns";
+import { columns } from "./_components/Columns";
 import Header from "@/components/shared/Header";
 import DataTable from "@/components/ui/DataTable";
 import CreateNavigation from "@/components/shared/CreateNavigation";
