@@ -14,7 +14,7 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+} from "@/components/ui/DropdownMenu";
 import { Copy, MoreHorizontal, PenSquare, Trash2 } from "lucide-react";
 import { Category } from "./Columns";
 import AlertModal from "@/components/shared/AlertModal";

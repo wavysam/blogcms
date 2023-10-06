@@ -31,17 +31,17 @@ const AlertModal = ({
       <AlertDialogContent>
         <AlertDialogHeader>
           <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
-          <AlertDialogDescription>
-            This action cannot be undone. This will permanently delete the
-            selected item and remove it from servers.
-          </AlertDialogDescription>
-          <AlertDialogFooter>
-            <AlertDialogCancel onClick={onClose}>Cancel</AlertDialogCancel>
-            <AlertDialogAction onClick={onConfirm} disabled={disabled}>
-              Continue
-            </AlertDialogAction>
-          </AlertDialogFooter>
         </AlertDialogHeader>
+        <AlertDialogDescription>
+          This action cannot be undone. This will permanently delete the
+          selected item and remove it from servers.
+        </AlertDialogDescription>
+        <AlertDialogFooter>
+          <AlertDialogCancel onClick={onClose}>Cancel</AlertDialogCancel>
+          <AlertDialogAction onClick={onConfirm} disabled={disabled}>
+            Continue
+          </AlertDialogAction>
+        </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>
   );

@@ -15,10 +15,10 @@ import {
   FormMessage,
 } from "../ui/Form";
 import { CategorySchema, CategorySchemaType } from "@/lib/validator/category";
-import { Input } from "../ui/Input";
-import { Label } from "../ui/Label";
-import { Button } from "../ui/Button";
-import { Textarea } from "../ui/Textarea";
+import { Input } from "@/components/ui/Input";
+import { Label } from "@/components/ui/Label";
+import { Button } from "@/components/ui/Button";
+import { Textarea } from "@/components/ui/Textarea";
 import { Category } from "@prisma/client";
 
 type CategoryFormProps = {

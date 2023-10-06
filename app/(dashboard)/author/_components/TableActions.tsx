@@ -14,7 +14,7 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+} from "@/components/ui/DropdownMenu";
 import { Copy, MoreHorizontal, PenSquare, Trash2 } from "lucide-react";
 import { Author } from "./Columns";
 import AlertModal from "@/components/shared/AlertModal";
@@ -80,7 +80,7 @@ const TableActions = ({ data }: TableActionsProps) => {
           </DropdownMenuItem>
           <DropdownMenuSeparator />
           <DropdownMenuItem
-            onClick={() => router.push(`/category/${data.id}`)}
+            onClick={() => router.push(`/author/${data.id}`)}
             className="cursor-pointer"
           >
             <PenSquare className="h-4 w-4 mr-2" />
