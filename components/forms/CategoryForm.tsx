@@ -19,22 +19,35 @@ import { Input } from "../ui/Input";
 import { Label } from "../ui/Label";
 import { Button } from "../ui/Button";
 import { Textarea } from "../ui/Textarea";
+import { Category } from "@prisma/client";
 
-const CategoryForm = () => {
+type CategoryFormProps = {
+  initialData?: Pick<Category, "id" | "name" | "description">;
+};
+
+const CategoryForm = ({ initialData }: CategoryFormProps) => {
   const router = useRouter();
 
   const form = useForm<CategorySchemaType>({
     resolver: zodResolver(CategorySchema),
     defaultValues: {
-      name: "",
-      description: "",
+      name: initialData?.name || "",
+      description: initialData?.description || "",
     },
   });
 
-  const { mutate: createCategory, isLoading } = useMutation({
+  const { mutate: createUpdateCategory, isLoading } = useMutation({
     mutationFn: async (payload: CategorySchemaType) => {
-      const { data } = await axios.post("/api/category", payload);
-      return data;
+      if (initialData) {
+        const { data } = await axios.patch(
+          `/api/category?categoryId=${initialData.id}`,
+          payload
+        );
+        return data;
+      } else {
+        const { data } = await axios.post("/api/category", payload);
+        return data;
+      }
     },
     onError: (error) => {
       if (error instanceof AxiosError) {
@@ -45,17 +58,19 @@ const CategoryForm = () => {
           return toast.error(error.response.data);
         }
       }
-      return toast.error("Failed to create category");
+      return toast.error("Something went wrong");
     },
     onSuccess: () => {
-      toast.success("Category created");
+      initialData
+        ? toast.success("Category updated")
+        : toast.success("Category created");
       router.refresh();
       router.push("/category");
     },
   });
 
   const onSubmit = (values: CategorySchemaType) => {
-    createCategory(values);
+    createUpdateCategory(values);
   };
 
   return (
@@ -66,7 +81,9 @@ const CategoryForm = () => {
           control={form.control}
           render={({ field }) => (
             <FormItem className="mb-5">
-              <Label htmlFor="name">Name</Label>
+              <Label htmlFor="name">
+                Name <span className="text-red-500">*</span>
+              </Label>
               <FormControl>
                 <Input {...field} id="name" disabled={isLoading} />
               </FormControl>
@@ -90,7 +107,7 @@ const CategoryForm = () => {
         />
 
         <Button type="submit" disabled={isLoading}>
-          Create
+          {initialData ? "Update" : "Create"}
         </Button>
       </form>
     </Form>
