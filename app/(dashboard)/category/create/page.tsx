@@ -4,7 +4,7 @@ import Header from "@/components/shared/Header";
 const Page = () => {
   return (
     <>
-      <Header title="Create category" showBackArrow />
+      <Header title="Add category" showBackArrow />
       <div className="my-12 max-w-md">
         <CategoryForm />
       </div>
