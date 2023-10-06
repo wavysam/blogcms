@@ -39,3 +39,30 @@ export async function GET(request: NextRequest) {
     return new NextResponse("Internal server error", { status: 500 });
   }
 }
+
+export async function DELETE(request: NextRequest) {
+  try {
+    const url = new URL(request.url);
+    const categoryId = url.searchParams.get("categoryId")?.toString() || "";
+
+    const category = await prisma.category.findUnique({
+      where: {
+        id: categoryId,
+      },
+    });
+
+    if (!category) {
+      return new NextResponse("Category not found", { status: 404 });
+    }
+
+    await prisma.category.delete({
+      where: {
+        id: categoryId,
+      },
+    });
+
+    return new NextResponse("Category deleted", { status: 200 });
+  } catch (error) {
+    return new NextResponse("Internal server error", { status: 500 });
+  }
+}
