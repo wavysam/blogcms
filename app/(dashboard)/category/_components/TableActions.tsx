@@ -54,6 +54,7 @@ const TableActions = ({ data }: TableActionsProps) => {
     onSuccess: () => {
       toast.success("Category removed");
       router.refresh();
+      setIsOpen(false);
     },
   });
 
