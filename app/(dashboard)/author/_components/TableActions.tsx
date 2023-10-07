@@ -34,7 +34,10 @@ const TableActions = ({ data }: TableActionsProps) => {
 
   const { mutate: deleteCategory, isLoading } = useMutation({
     mutationFn: async () => {
-      // Todo table actions
+      const { data: responseData } = await axios.delete(
+        `/api/author?authorId=${data.id}`
+      );
+      return responseData;
     },
     onError: (error) => {
       if (error instanceof AxiosError) {
@@ -46,11 +49,12 @@ const TableActions = ({ data }: TableActionsProps) => {
         }
       }
 
-      return toast.error("Failed to delete category");
+      return toast.error("Failed to remove author");
     },
     onSuccess: () => {
-      toast.success("Category removed");
+      toast.success("Author removed");
       router.refresh();
+      setIsOpen(false);
     },
   });
 
