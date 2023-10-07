@@ -139,7 +139,10 @@ const AuthorForm = ({ initialData }: AuthorFormProps) => {
               )}
               <FormControl>
                 {!field.value && (
-                  <FileUpload onChange={(url) => field.onChange(url)} />
+                  <FileUpload
+                    onChange={(url) => field.onChange(url)}
+                    endpoint="profileImageUploader"
+                  />
                 )}
               </FormControl>
             </FormItem>
